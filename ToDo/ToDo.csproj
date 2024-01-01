@@ -75,7 +75,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaskItem.cs" />
-    <Compile Include="DatabaseConnection.cs" />
+    <Compile Include="SQLiteDatabaseConnection.cs" />
     <Compile Include="TaskManager.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,21 +13,36 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 namespace ToDo
 {
     // TODO: create and use DTO's for database methods
-    internal class DatabaseConnection : IDatabaseConnection
-    {
-        private const string connectionString = "Data Source=TasksDatabase.db;Version=3;";
 
+    /// <summary>
+    /// Controller class to handle database connection
+    /// </summary>
+    internal class SQLiteDatabaseConnection : IDatabaseConnection
+    {
+        private const string databaseFileName = "TasksDatabase.db";
+        private string connectionString = $"Data Source={databaseFileName};Version=3;";
+        
+        
         public event EventHandler TasksLoaded;
         public event EventHandler TaskAdded;
         public event EventHandler TaskRemoved;
         public event EventHandler TasksCleared;
 
-        public DatabaseConnection()
+        public SQLiteDatabaseConnection()
         {
-
             Console.WriteLine("DatabaseConnectionManager constructor called");
-            
+            InitialiseDatabase();
         }
+
+        public void InitialiseDatabase()
+        {
+            if(!DatabaseExists())
+            {
+                Console.WriteLine("Database does not exist, creating...");
+                CreateTasksTable();
+            }
+        }
+
 
         public bool LoadTasksFromDatabase(out List<TaskItem> tList)
         {
@@ -48,6 +64,8 @@ namespace ToDo
                     {
                         while (reader.Read())
                         {
+                            // TODO: Is there a way I can parse this as a whole chunk instead of reading each
+                            // column row individually?
                             string taskName = reader["TaskName"].ToString();
                             bool isChecked = reader["IsChecked"].ToString() == "1" ? true : false;
                             TaskItem newTask = new TaskItem(taskName, isChecked);
@@ -165,6 +183,9 @@ namespace ToDo
             }
         }
 
+        #region Event Invokers 
+        // TODO: Needs to be implemented
+
         private void RaiseTasksLoadedEvent()
         {
             TasksLoaded?.Invoke(this, EventArgs.Empty);
@@ -183,6 +204,31 @@ namespace ToDo
         private void RaiseTasksClearedEvent()
         {
             TasksCleared?.Invoke(this, EventArgs.Empty);
+        }
+
+        #endregion
+
+        public bool DatabaseExists()
+        {
+            return File.Exists(databaseFileName);
+        }
+
+        public void CreateDatabase()
+        {
+            SQLiteConnection.CreateFile(databaseFileName);
+        }
+
+        public void CreateTasksTable()
+        {
+            using (var connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                using (var command = new SQLiteCommand("CREATE TABLE IF NOT EXISTS Tasks (Id INTEGER, TaskName TEXT, IsChecked INTEGER);", connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }
