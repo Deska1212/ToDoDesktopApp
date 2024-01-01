@@ -134,7 +134,7 @@ namespace ToDo
 
         private void OnClearTaskButtonClick(object sender, EventArgs e)
         {
-            taskManager.Tasks.Clear();
+            taskManager.ClearAllTasks();
             RefreshTaskDisplay();
             MessageBox.Show("All tasks cleared!");
         }   
