@@ -11,16 +11,19 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace ToDo
 {
-    internal class DatabaseConnectionManager
+    // TODO: create and use DTO's for database methods
+    internal class DatabaseConnection : IDatabaseConnection
     {
         private const string connectionString = "Data Source=TasksDatabase.db;Version=3;";
 
         public event EventHandler TasksLoaded;
         public event EventHandler TaskAdded;
         public event EventHandler TaskRemoved;
+        public event EventHandler TasksCleared;
 
-        public DatabaseConnectionManager()
+        public DatabaseConnection()
         {
+
             Console.WriteLine("DatabaseConnectionManager constructor called");
             
         }
@@ -57,7 +60,7 @@ namespace ToDo
             return true;
         }
 
-        public bool AddTaskToDatabase(int index, string taskName, bool isChecked)
+        public bool AddTaskToDatabase(int index, string taskName, bool isChecked)   
         {
             using (var connection = new SQLiteConnection(connectionString))
             {
@@ -71,7 +74,7 @@ namespace ToDo
 
                 using (var command = new SQLiteCommand("INSERT INTO Tasks (Id, TaskName, IsChecked) VALUES (@Id, @TaskName, @IsChecked)", connection))
                 {
-                    command.Parameters.AddWithValue("@Id", index);
+                    command.Parameters.AddWithValue("@Id", index); // TODO: Surely theres a setting in SQLite to have an auto idx/id??
                     command.Parameters.AddWithValue("@TaskName", taskName);
                     command.Parameters.AddWithValue("@IsChecked", isChecked ? 1 : 0);
                     command.ExecuteNonQuery();
@@ -175,6 +178,11 @@ namespace ToDo
         private void RaiseTaskRemovedEvent()
         { 
             TaskRemoved?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void RaiseTasksClearedEvent()
+        {
+            TasksCleared?.Invoke(this, EventArgs.Empty);
         }
     }
 }

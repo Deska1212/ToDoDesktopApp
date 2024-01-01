@@ -12,7 +12,7 @@ namespace ToDo
     internal class TaskManager
     {
         private List<TaskItem> tasks = new List<TaskItem>();
-        public DatabaseConnectionManager databaseConnectionManager = new DatabaseConnectionManager();
+        public IDatabaseConnection databaseConnectionManager = new DatabaseConnection();
 
         public List<TaskItem> Tasks
         {
@@ -24,6 +24,7 @@ namespace ToDo
 
         public TaskManager()
         {
+            // TODO: Implement dependancy injection
             bool validConnection = databaseConnectionManager.LoadTasksFromDatabase(out tasks);
         }
 
