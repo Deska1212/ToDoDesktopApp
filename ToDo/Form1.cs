@@ -27,7 +27,10 @@ namespace ToDo
             taskManager = new TaskManager(new SQLiteDatabaseConnection());
             Console.WriteLine("Form1 constructor called");
 
-            RefreshTaskDisplay();
+            if(taskManager.Tasks.Count != 0)
+            {            
+                RefreshTaskDisplay();
+            }
         }
         
 

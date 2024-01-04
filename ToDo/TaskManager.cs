@@ -14,13 +14,7 @@ namespace ToDo
         private List<TaskItem> tasks = new List<TaskItem>();
         public IDatabaseConnection databaseConnectionManager;
 
-        public List<TaskItem> Tasks
-        {
-            get
-            {
-                return tasks;
-            }
-        }
+        public List<TaskItem> Tasks { get => tasks; }
 
         public TaskManager(IDatabaseConnection dbConnection)
         {
