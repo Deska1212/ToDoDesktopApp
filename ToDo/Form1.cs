@@ -96,6 +96,8 @@ namespace ToDo
             taskManager.AddTask(taskName);
             RefreshTaskDisplay();
             ClearTaskNameInput();
+
+            TaskFlowPanel.Controls.Add(new TaskItemControl());
         }
 
         /// <summary>
