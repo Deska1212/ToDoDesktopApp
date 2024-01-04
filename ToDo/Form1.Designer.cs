@@ -42,7 +42,7 @@
             // AddTaskButton
             // 
             this.AddTaskButton.Location = new System.Drawing.Point(305, 10);
-            this.AddTaskButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AddTaskButton.Margin = new System.Windows.Forms.Padding(2);
             this.AddTaskButton.Name = "AddTaskButton";
             this.AddTaskButton.Size = new System.Drawing.Size(182, 65);
             this.AddTaskButton.TabIndex = 0;
@@ -53,7 +53,7 @@
             // TaskNameInputTextBox
             // 
             this.TaskNameInputTextBox.Location = new System.Drawing.Point(377, 80);
-            this.TaskNameInputTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TaskNameInputTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.TaskNameInputTextBox.Name = "TaskNameInputTextBox";
             this.TaskNameInputTextBox.Size = new System.Drawing.Size(111, 20);
             this.TaskNameInputTextBox.TabIndex = 1;
@@ -72,7 +72,7 @@
             // ClearTasksButton
             // 
             this.ClearTasksButton.Location = new System.Drawing.Point(308, 251);
-            this.ClearTasksButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ClearTasksButton.Margin = new System.Windows.Forms.Padding(2);
             this.ClearTasksButton.Name = "ClearTasksButton";
             this.ClearTasksButton.Size = new System.Drawing.Size(182, 65);
             this.ClearTasksButton.TabIndex = 3;
@@ -83,7 +83,7 @@
             // RemoveTaskButton
             // 
             this.RemoveTaskButton.Location = new System.Drawing.Point(308, 182);
-            this.RemoveTaskButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RemoveTaskButton.Margin = new System.Windows.Forms.Padding(2);
             this.RemoveTaskButton.Name = "RemoveTaskButton";
             this.RemoveTaskButton.Size = new System.Drawing.Size(182, 65);
             this.RemoveTaskButton.TabIndex = 4;
@@ -95,7 +95,7 @@
             // 
             this.TaskListDisplay.FormattingEnabled = true;
             this.TaskListDisplay.Location = new System.Drawing.Point(308, 144);
-            this.TaskListDisplay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TaskListDisplay.Margin = new System.Windows.Forms.Padding(2);
             this.TaskListDisplay.Name = "TaskListDisplay";
             this.TaskListDisplay.Size = new System.Drawing.Size(182, 34);
             this.TaskListDisplay.TabIndex = 6;
@@ -126,7 +126,7 @@
             // 
             this.TaskFlowPanel.AllowDrop = true;
             this.TaskFlowPanel.AutoScroll = true;
-            this.TaskFlowPanel.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.TaskFlowPanel.BackColor = System.Drawing.SystemColors.Control;
             this.TaskFlowPanel.Location = new System.Drawing.Point(12, 16);
             this.TaskFlowPanel.Name = "TaskFlowPanel";
             this.TaskFlowPanel.Size = new System.Drawing.Size(286, 300);
@@ -146,7 +146,7 @@
             this.Controls.Add(this.TaskNameLabel);
             this.Controls.Add(this.TaskNameInputTextBox);
             this.Controls.Add(this.AddTaskButton);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
