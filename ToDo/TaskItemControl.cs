@@ -35,7 +35,7 @@ namespace ToDo
 
         private void TaskDeleteButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Deleteing Task Item Control");
+            Console.WriteLine("Deleting Task Item Control");
             RaiseTaskDeleteButtonClickEvent(); // This is an event invoking another event?
             
         }
