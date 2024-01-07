@@ -36,7 +36,7 @@
             this.TaskListDisplay = new System.Windows.Forms.CheckedListBox();
             this.SelectedIndexLabel = new System.Windows.Forms.Label();
             this.SelectedTaskName = new System.Windows.Forms.Label();
-            this.TaskFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.TaskFlowLayoutPanel = new ToDo.TaskFlowLayoutPanel();
             this.SuspendLayout();
             // 
             // AddTaskButton
@@ -122,22 +122,20 @@
             this.SelectedTaskName.TabIndex = 8;
             this.SelectedTaskName.Text = "Selected Task Name: ";
             // 
-            // TaskFlowPanel
+            // TaskFlowLayoutPanel
             // 
-            this.TaskFlowPanel.AllowDrop = true;
-            this.TaskFlowPanel.AutoScroll = true;
-            this.TaskFlowPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.TaskFlowPanel.Location = new System.Drawing.Point(12, 16);
-            this.TaskFlowPanel.Name = "TaskFlowPanel";
-            this.TaskFlowPanel.Size = new System.Drawing.Size(286, 300);
-            this.TaskFlowPanel.TabIndex = 10;
+            this.TaskFlowLayoutPanel.AutoScroll = true;
+            this.TaskFlowLayoutPanel.Location = new System.Drawing.Point(13, 10);
+            this.TaskFlowLayoutPanel.Name = "TaskFlowLayoutPanel";
+            this.TaskFlowLayoutPanel.Size = new System.Drawing.Size(285, 306);
+            this.TaskFlowLayoutPanel.TabIndex = 9;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(496, 321);
-            this.Controls.Add(this.TaskFlowPanel);
+            this.Controls.Add(this.TaskFlowLayoutPanel);
             this.Controls.Add(this.SelectedTaskName);
             this.Controls.Add(this.SelectedIndexLabel);
             this.Controls.Add(this.TaskListDisplay);
@@ -164,8 +162,8 @@
         private System.Windows.Forms.Button RemoveTaskButton;
         private System.Windows.Forms.Label SelectedIndexLabel;
         private System.Windows.Forms.Label SelectedTaskName;
-        private System.Windows.Forms.FlowLayoutPanel TaskFlowPanel;
         protected System.Windows.Forms.CheckedListBox TaskListDisplay;
+        private TaskFlowLayoutPanel TaskFlowLayoutPanel;
     }
 }
 

@@ -25,14 +25,16 @@ namespace ToDo
         {
             InitializeComponent();
             taskManager = new TaskManager(new SQLiteDatabaseConnection());
+            taskManager.TaskListUpdate += OnTaskListUpdate;
             Console.WriteLine("Form1 constructor called");
 
             if(taskManager.Tasks.Count != 0)
             {            
-                RefreshTaskDisplay();
+                RefreshTaskDisplay(); // TODO: We should be doing this when we load tasks on init from db
             }
         }
-        
+
+       
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -45,9 +47,17 @@ namespace ToDo
         private void RefreshTaskDisplay()
         {
             ClearTaskDisplay();
-                       
-           for(int i = 0; i < taskManager.Tasks.Count; ++i)
+
+            for(int i = 0; i < taskManager.Tasks.Count; i++)
+            {
+                TaskFlowLayoutPanel.AddTaskItemToDisplay(taskManager.Tasks[i]);
+            }
+
+
+           // Do logic for the TaskFlowLayoutPanel here instead
+           for (int i = 0; i < taskManager.Tasks.Count; ++i)
            {
+                
                 TaskListDisplay.Items.Add(taskManager.Tasks[i], taskManager.Tasks[i].IsChecked);
            }  
         }
@@ -94,10 +104,9 @@ namespace ToDo
             }
 
             taskManager.AddTask(taskName);
-            RefreshTaskDisplay();
             ClearTaskNameInput();
 
-            TaskFlowPanel.Controls.Add(new TaskItemControl());
+            // TaskFlowPanel.Controls.Add(new TaskItemControl());
         }
 
         /// <summary>
@@ -149,7 +158,12 @@ namespace ToDo
             taskManager.ClearAllTasks();
             RefreshTaskDisplay();
             MessageBox.Show("All tasks cleared!");
-        }   
+        }
+
+        private void OnTaskListUpdate(object sender, EventArgs e)
+        {
+            RefreshTaskDisplay();
+        }
 
     }
 

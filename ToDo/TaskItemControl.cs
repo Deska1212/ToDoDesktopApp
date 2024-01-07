@@ -12,19 +12,41 @@ namespace ToDo
 {
     public partial class TaskItemControl : UserControl
     {
-        public TaskItemControl()
+        TaskItem taskItem;
+
+        public event EventHandler<TaskDeleteEventArgs> DeleteButtonClick;
+
+
+        public TaskItemControl(TaskItem tItem)
         {
             InitializeComponent();
+            this.taskItem = tItem;
+            UpdateTaskItemControlData(tItem);
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        public void UpdateTaskItemControlData(TaskItem newTaskItem)
         {
-
+            this.taskItem = newTaskItem;
+            TaskNameBox.Text = taskItem.TaskName;
+            TaskCheckBox.Checked = taskItem.IsChecked;
+            // TODO: Implement due date
+            // TODO: Implement Drag'n'drog handle and colour of handle to represent task completeness
         }
 
-        private void TaskItemControl_Load(object sender, EventArgs e)
+        private void TaskDeleteButton_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("Deleteing Task Item Control");
+            RaiseTaskDeleteButtonClickEvent(); // This is an event invoking another event?
+            
+        }
 
+        private void RaiseTaskDeleteButtonClickEvent()
+        {
+            if (DeleteButtonClick != null)
+            {
+                TaskDeleteEventArgs args = new TaskDeleteEventArgs(this);
+                DeleteButtonClick(this, args);
+            }
         }
     }
 }

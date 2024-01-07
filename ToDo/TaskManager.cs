@@ -14,6 +14,10 @@ namespace ToDo
         private List<TaskItem> tasks = new List<TaskItem>();
         public IDatabaseConnection databaseConnectionManager;
 
+        public event EventHandler TaskListUpdate;
+
+        
+
         public List<TaskItem> Tasks { get => tasks; }
 
         public TaskManager(IDatabaseConnection dbConnection)
@@ -25,7 +29,8 @@ namespace ToDo
         }
 
         /// <summary>
-        /// View method for adding a new task to the task list, task check state is defaulted to false, index is handled by the task manager
+        /// View method for adding a new task to the task list,
+        /// task check state is defaulted to false, index is handled by the task manager
         /// </summary>
         /// <param name="taskName">Task name to add</param>
         public void AddTask(string taskName)
@@ -33,6 +38,7 @@ namespace ToDo
             TaskItem task = new TaskItem(taskName);
             tasks.Add(task);
             databaseConnectionManager.AddTaskToDatabase(tasks.Count - 1, taskName, false);
+            RaiseTaskListUpdateEvent();
         }
 
         /// <summary>
@@ -45,6 +51,8 @@ namespace ToDo
             {
                 tasks.RemoveAt(index);
                 databaseConnectionManager.RemoveTaskFromDatabase(index);
+                RaiseTaskListUpdateEvent();
+
             }
         }
 
@@ -56,6 +64,8 @@ namespace ToDo
             tasks.Clear();
             int rowsAffected = databaseConnectionManager.ClearAllTasksFromDatabase();
             Console.Write(rowsAffected + " rows affected");
+            RaiseTaskListUpdateEvent();
+
         }
 
         /// <summary>
@@ -68,6 +78,15 @@ namespace ToDo
             tasks[index].IsChecked = newState;
             TaskItem newTaskItem = tasks[index];
             databaseConnectionManager.ModifyTaskInDatabase(newTaskItem, index);
+            RaiseTaskListUpdateEvent();
+
         }
+
+        private void RaiseTaskListUpdateEvent()
+        { 
+            TaskListUpdate?.Invoke(this, EventArgs.Empty);
+        }
+
+
     }
 }

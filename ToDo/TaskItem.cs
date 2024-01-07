@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace ToDo
 {
-    internal class TaskItem
+    public class TaskItem
     {
         public string TaskName { get; set; }
         public bool IsChecked { get; set; }
